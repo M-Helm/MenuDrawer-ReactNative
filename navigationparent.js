@@ -23,8 +23,8 @@ var menuArray = [
 
 var NavigationParent = React.createClass({
   getInitialState() {
-    //Assign the initial state of the app and setup the menu options as a
-    //listview data source.
+    /* Assign the initial state of the app and setup the menu options as a
+    listview data source.*/
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
       menuShowing: false,
@@ -33,26 +33,26 @@ var NavigationParent = React.createClass({
       dataSource: ds.cloneWithRows(menuArray),
     };
   },
-  componentWillMount() {
-
-  },
   _onMenuPress() {
-  // When user presses the menu toggle this animates
-  // the menu in and out of the view
-    LayoutAnimation.spring();
+    /* When user presses the menu toggle this animates
+     the menu in and out of the view */
     if(this.state.menuShowing){
       this.setState({menuWidth: 0, menuShowing: false});
       return;
     }
-    this.setState({menuWidth: 200, menuShowing: true});
+    else{
+      this.setState({menuWidth: 200, menuShowing: true});
+    }
+    LayoutAnimation.easeInEaseOut();
   },
   _onMenuItemPress(view){
-    // When the user selects a menu item this switch will
-    // close the menu drawer and change the view
-    LayoutAnimation.spring();
+    /* When the user selects a menu item this will
+     close the menu drawer and change the view */
+    LayoutAnimation.easeInEaseOut();
     this.setState({menuWidth:0, menuShowing: false, currentPage: view});
   },
   _renderRow(rowData, sectionID, rowID) {
+    /* defines how the menu list will render */
     return (
       <TouchableHighlight underlayColor='#999999'
         style={styles.menuTouchable}
@@ -62,28 +62,31 @@ var NavigationParent = React.createClass({
     );
   },
   render () {
-        return (
-          <View style={styles.container}>
-            <View style={styles.navBar}>
-              <Text style={styles.title}></Text>
-              <TouchableHighlight underlayColor='#183E63'
-                onPress={this._onMenuPress}
-                style={styles.menuButton}>
-                <Image source={require('./ic_burger_44px.png')}
-                  style={styles.icon}/>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.navShadow}></View>
-            {this.state.currentPage}
-            <View style={[styles.menuContainer, {width: this.state.menuWidth}]}>
-              <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this._renderRow}
-              />
-            </View>
-          </View>
-        );
-      }
+    return (
+      <View style={styles.container}>
+        {/* defines how the navigation bar will render */}
+        <View style={styles.navBar}>
+          <Text style={styles.title}></Text>
+          <TouchableHighlight underlayColor='#183E63'
+            onPress={this._onMenuPress}
+            style={styles.menuButton}>
+            <Image source={require('./ic_burger_44px.png')}
+              style={styles.icon}/>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.navShadow}></View>
+        {/* state defines the current view here */}
+        {this.state.currentPage}
+        {/* slide out menu drawer defined here */}
+        <View style={[styles.menuContainer, {width: this.state.menuWidth}]}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this._renderRow}
+          />
+        </View>
+      </View>
+    );
+  }
 });
 
 var styles = React.StyleSheet.create({
@@ -134,9 +137,9 @@ var styles = React.StyleSheet.create({
     color: '#ffffff',
   },
   icon: {
-    top:-14,
-    width:55,
-    height:55,
+    top:-10,
+    width:50,
+    height:50,
   },
 });
 
