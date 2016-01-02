@@ -11,14 +11,17 @@ var {
   Platform,
   TouchableHighlight,
   Component,
+  NavigatorIOS,
 } = React;
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: 'absolute',
     backgroundColor: '#fffff0',
+    top: 69,
+    width: 414,
+    height: 800,
   },
   description: {
     marginBottom: 20,
@@ -28,13 +31,7 @@ var styles = StyleSheet.create({
   },
 });
 
-class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      placeholder: 'nil'
-    };
-  }
+var LandingPage = React.createClass({
   render() {
     return (
       <View style={styles.container}>
@@ -44,6 +41,6 @@ class LandingPage extends Component {
       </View>
     );
   }
-}
+});
 
 module.exports = LandingPage;
