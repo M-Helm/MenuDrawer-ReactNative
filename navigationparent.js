@@ -38,7 +38,6 @@ var NavigationParent = React.createClass({
      the menu in and out of the view */
     if(this.state.menuShowing){
       this.setState({menuWidth: 0, menuShowing: false});
-      return;
     }
     else{
       this.setState({menuWidth: 200, menuShowing: true});
