@@ -29,6 +29,7 @@ var NavigationParent = React.createClass({
     return {
       menuShowing: false,
       menuWidth: 0,
+      menuShadowWidth: 0,
       currentPage: <LandingPage/>,
       dataSource: ds.cloneWithRows(menuArray),
     };
@@ -37,10 +38,10 @@ var NavigationParent = React.createClass({
     /* When user presses the menu toggle this animates
      the menu in and out of the view */
     if(this.state.menuShowing){
-      this.setState({menuWidth: 0, menuShowing: false});
+      this.setState({menuWidth: 0, menuShadowWidth: 0, menuShowing: false});
     }
     else{
-      this.setState({menuWidth: 200, menuShowing: true});
+      this.setState({menuWidth: 200, menuShadowWidth: 8,  menuShowing: true});
     }
     LayoutAnimation.easeInEaseOut();
   },
@@ -82,6 +83,7 @@ var NavigationParent = React.createClass({
             dataSource={this.state.dataSource}
             renderRow={this._renderRow}
           />
+          <View style={[styles.menuShadow, {width: this.state.menuShadowWidth}]}/>
         </View>
       </View>
     );
@@ -94,7 +96,7 @@ var styles = React.StyleSheet.create({
   },
   navBar: {
     height: 68,
-    backgroundColor: '#183E63',
+    backgroundColor: '#fffff0',
     opacity: .75,
   },
   navShadow: {
@@ -114,17 +116,15 @@ var styles = React.StyleSheet.create({
     top: 30,
     right: 10,
   },
+  menuShadow: {
+    backgroundColor: '#000000',
+    opacity: 0.3,
+  },
   menuContainer:{
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#183E63',
-  },
-  menuShadow:{
-    backgroundColor: '#000000',
-  },
-  menuColumn: {
-    flex: .5,
-    backgroundColor: '#183E63',
-    opacity: .75,
+    opacity: 0.9,
   },
   menuTouchable:{
     paddingTop: 10,

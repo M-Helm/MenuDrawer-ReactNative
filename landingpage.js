@@ -26,6 +26,7 @@ var styles = StyleSheet.create({
   description: {
     marginBottom: 20,
     fontSize: 18,
+    top: 100,
     textAlign: 'center',
     color: '#656565'
   },
